@@ -14,7 +14,7 @@
         }
     },
     {
-        "id": "data/LaptopFactory/Equipment/RAMStepper",
+        "id": "data/LaptopFactory/Equipment/RamStepper",
         "type": "supplychain/laptop/Stepper",
         "value": {
             "produces": "supplychain/laptop/RAM"
@@ -39,6 +39,13 @@
         "type": "supplychain/laptop/LcdAssembler",
         "value": {
             "produces": "supplychain/laptop/LcdScreen"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/Equipment/LaptopAssembler",
+        "type": "supplychain/laptop/LaptopAssembler",
+        "value": {
+            "produces": "supplychain/laptop/Laptop"
         }
     },
     {
@@ -74,6 +81,13 @@
         "type": "supplychain/Storage",
         "value": {
             "stores": "supplychain/laptop/SSD"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/LaptopStorage",
+        "type": "supplychain/Storage",
+        "value": {
+            "stores": "supplychain/laptop/Laptop"
         }
     }
 ]

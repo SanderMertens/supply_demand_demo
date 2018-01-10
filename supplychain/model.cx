@@ -1,5 +1,8 @@
 in package supplychain
 
+enum OperationalState:/
+    Off, On, Idle
+
 // Forward declarations
 class Product
 container Factory
@@ -19,30 +22,43 @@ class Product:/
 class Storage:/
     // Static values
     stores: Product, const
-    max_storage: uint32, const
 
     // Runtime values
     units_stored: uint32
 
 // Equipment component (to be instantiated by subclass of Equipment)
 class EquipmentComponent:/
+    int16 validate()
+
+    // Static values
+    power_consumption: float32, const|readonly
+
     // Runtime values
+    operational_state: supplychain/OperationalState
     progress: uint8, readonly
     temperature: float32, readonly
-    pressure: float32, readonly
-    power_consumption: float32, readonly
 
 container Factory:/
+    int16 validate()
+
+    // Editable values
+    demand: uint32
+
     // Static values
     produces: Product, const
 
     // Runtime values
     power_consumption: float32, readonly
+    internal_demand: list{ProductQuantity}, readonly
 
     table Equipment:/
+        int16 validate()
+
         // Static values
         produces: Product, const
-        power_consumption: float32, const
+        process_steps: list{EquipmentComponent}, const|readonly
 
         // Runtime values
-        powered: target{bool}
+        power_consumption: float32, readonly
+        operational_state: supplychain/OperationalState, readonly
+        current_step: uint32, readonly

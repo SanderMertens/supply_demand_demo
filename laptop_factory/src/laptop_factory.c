@@ -26,6 +26,7 @@ error:
 
 /* Application entrypoint */
 int cortomain(int argc, char *argv[]) {
+    corto_iter it;
 
     corto_log_verbositySet(CORTO_TRACE);
 
@@ -33,8 +34,29 @@ int cortomain(int argc, char *argv[]) {
         goto error;
     }
 
-    /* Keep alive */
+    /* Find all instances of Factory objects and store them in a list */
+    corto_ll factories = corto_ll_new();
+    if (corto_select("data/*").type("/supplychain/Factory").iter_objects(&it)) {
+        goto error;
+    }
+
+    while (corto_iter_hasNext(&it)) {
+        corto_object f = corto_iter_next(&it);
+        corto_ll_append(factories, f);
+    }
+
+    if (!corto_ll_count(factories)) {
+        corto_throw("no factories found in configuration!");
+        goto error;
+    }
+
+    /* Periodically update all factories */
     while (true) {
+        it = corto_ll_iter(factories);
+        while (corto_iter_hasNext(&it)) {
+            corto_object f = corto_iter_next(&it);
+            corto_update(f);
+        }
         corto_sleep(1, 0);
     }
 

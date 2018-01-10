@@ -2,19 +2,30 @@ in package supplychain/laptop
 use /supplychain
 
 table Stepper: Factory/Equipment:/
+    int16 construct()
     leaf wafer_loader: type = EquipmentComponent
     leaf wafer_alignment: type = EquipmentComponent
     leaf illumination: type = EquipmentComponent
 
 table SsdAssembler: Factory/Equipment:/
+    int16 construct()
     leaf nand_flash_assembly: type = EquipmentComponent
     leaf wafer_dicing: type = EquipmentComponent
     leaf surface_mount: type = EquipmentComponent
 
 table LcdAssembler: Factory/Equipment:/
+    int16 construct()
     leaf coating: type = EquipmentComponent
     leaf lithography: type = EquipmentComponent
     leaf backlight: type = EquipmentComponent
+
+table LaptopAssembler: Factory/Equipment:/
+    int16 construct()
+    leaf place_cpu: type = EquipmentComponent
+    leaf place_ram: type = EquipmentComponent
+    leaf place_ssd: type = EquipmentComponent
+    leaf place_screen: type = EquipmentComponent
+    leaf assemble: type = EquipmentComponent
 
 Product CPU {
     description = "Central processing unit"
