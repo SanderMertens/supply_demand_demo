@@ -148,13 +148,19 @@ int16_t supplychain_Factory_validate(
     corto_id factory_id;
     corto_fullpath(factory_id, this);
 
+    supplychain_Storage s = find_storage(this, this->produces);
+    if (!s) {
+        corto_throw("cannot find storage for '%s'", corto_fullpath(NULL, this->produces));
+        goto error;
+    }
+
     supplychain_ProductQuantity own_demand = {
         this->produces,
-        this->demand
+        this->demand - s->units_stored
     };
 
     /* Recalculate demand for different products */
-    if (calculate_demand(this, this->produces, this->demand)) {
+    if (calculate_demand(this, this->produces, own_demand.quantity)) {
         goto error;
     }
 
