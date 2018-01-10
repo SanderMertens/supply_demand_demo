@@ -1,22 +1,30 @@
 in package supplychain/laptop
 use /supplychain
 
-Product CpuCore {
-    description = "single processing core of a CPU"
-}
+table Stepper: Factory/Equipment:/
+    leaf wafer_loader: type = EquipmentComponent
+    leaf wafer_alignment: type = EquipmentComponent
+    leaf illumination: type = EquipmentComponent
 
-Product QuadCoreCpu {
+table SsdAssembler: Factory/Equipment:/
+    leaf nand_flash_assembly: type = EquipmentComponent
+    leaf wafer_dicing: type = EquipmentComponent
+    leaf surface_mount: type = EquipmentComponent
+
+table LcdAssembler: Factory/Equipment:/
+    leaf coating: type = EquipmentComponent
+    leaf lithography: type = EquipmentComponent
+    leaf backlight: type = EquipmentComponent
+
+Product CPU {
     description = "CPU with four cores"
-    requires = {
-        {CpuCore, 4}
-    }
 }
 
-Product MemoryChip2GB {
+Product RAM {
     description = "2GB RAM module"
 }
 
-Product DiskDrive {
+Product SSD {
     description = "1TB persistent storage"
 }
 
@@ -27,9 +35,9 @@ Product LcdScreen {
 Product Laptop {
     description = "superfast quadcore laptop with 8GB of RAM and LCD screen"
     requires = {
-        {QuadCoreCpu, 1},
-        {MemoryChip2GB, 4},
-        {DiskDrive, 1},
+        {CPU, 1},
+        {RAM, 4},
+        {SSD, 1},
         {LcdScreen, 1}
     }
 }

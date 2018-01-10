@@ -1,31 +1,48 @@
 in package supplychain
 
+// Forward declarations
 class Product
+container Factory
+table Factory/Equipment
 
-struct Requirement:/
+// Quantity of products
+struct ProductQuantity:/
     product: supplychain/Product
     quantity: uint32
 
 class Product:/
-    description: string
-    requires: list{Requirement}
+    // Static values
+    description: string, const
+    requires: list{ProductQuantity}, const
+    equipment_type: class
 
 class Storage:/
+    // Static values
     stores: Product, const
+    max_storage: uint32, const
+
+    // Runtime values
     units_stored: uint32
-    max_storage: uint32
+
+// Equipment component (to be instantiated by subclass of Equipment)
+class EquipmentComponent:/
+    // Runtime values
+    progress: uint8, readonly
+    temperature: float32, readonly
+    pressure: float32, readonly
+    power_consumption: float32, readonly
 
 container Factory:/
+    // Static values
     produces: Product, const
+
+    // Runtime values
     power_consumption: float32, readonly
 
     table Equipment:/
+        // Static values
         produces: Product, const
+
+        // Runtime values
         enabled: target{bool}
         power_consumption: float32, readonly
-
-        table Component:/
-            progress: uint8
-            temperature: float32
-            pressure: float32
-            power_consumption: float32

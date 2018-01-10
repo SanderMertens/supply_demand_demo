@@ -1,9 +1,37 @@
 [
     {
-        "id": "cpucore_factory",
+        "id": "LaptopFactory",
         "type": "supplychain/Factory",
         "value": {
             "produces": "supplychain/laptop/Laptop"
+        }
+    },
+    {
+        "id": "LaptopFactory/Equipment/Stepper",
+        "type": "supplychain/laptop/Stepper",
+        "value": {
+            "produces": "supplychain/laptop/Cpu"
+        }
+    },
+    {
+        "id": "LaptopFactory/Equipment/Stepper",
+        "type": "supplychain/laptop/Stepper",
+        "value": {
+            "produces": "supplychain/laptop/RAM"
+        }
+    },
+    {
+        "id": "LaptopFactory/Equipment/SsdAssembler",
+        "type": "supplychain/laptop/SsdAssembler",
+        "value": {
+            "produces": "supplychain/laptop/SSD"
+        }
+    },
+    {
+        "id": "LaptopFactory/Equipment/LcdAssembler",
+        "type": "supplychain/laptop/LcdAssembler",
+        "value": {
+            "produces": "supplychain/laptop/LcdScreen"
         }
     }
 ]
