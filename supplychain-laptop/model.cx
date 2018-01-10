@@ -1,0 +1,35 @@
+in package supplychain/laptop
+use /supplychain
+
+Product CpuCore {
+    description = "single processing core of a CPU"
+}
+
+Product QuadCoreCpu {
+    description = "CPU with four cores"
+    requires = {
+        {CpuCore, 4}
+    }
+}
+
+Product MemoryChip2GB {
+    description = "2GB RAM module"
+}
+
+Product DiskDrive {
+    description = "1TB persistent storage"
+}
+
+Product LcdScreen {
+    description = "15 inch LCD laptop screen"
+}
+
+Product Laptop {
+    description = "superfast quadcore laptop with 8GB of RAM and LCD screen"
+    requires = {
+        {QuadCoreCpu, 1},
+        {MemoryChip2GB, 4},
+        {DiskDrive, 1},
+        {LcdScreen, 1}
+    }
+}

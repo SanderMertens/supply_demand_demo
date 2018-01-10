@@ -1,0 +1,9 @@
+[
+    {
+        "id": "cpucore_factory",
+        "type": "supplychain/Factory",
+        "value": {
+            "produces": "supplychain/laptop/Laptop"
+        }
+    }
+]

@@ -1,0 +1,11 @@
+{
+    "id": "supplychain",
+    "type": "package",
+    "value": {
+        "description": "A toy model for simulating supply chains",
+        "author": "Sander Mertens",
+        "version": "1.0.0",
+        "language": "c",
+        "use": ["tags"]
+    }
+}

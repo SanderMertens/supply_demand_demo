@@ -1,0 +1,31 @@
+in package supplychain
+
+class Product
+
+struct Requirement:/
+    product: supplychain/Product
+    quantity: uint32
+
+class Product:/
+    description: string
+    requires: list{Requirement}
+
+class Storage:/
+    stores: Product, const
+    units_stored: uint32
+    max_storage: uint32
+
+container Factory:/
+    produces: Product, const
+    power_consumption: float32, readonly
+
+    table Equipment:/
+        produces: Product, const
+        enabled: target{bool}
+        power_consumption: float32, readonly
+
+        table Component:/
+            progress: uint8
+            temperature: float32
+            pressure: float32
+            power_consumption: float32

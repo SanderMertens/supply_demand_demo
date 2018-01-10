@@ -1,0 +1,11 @@
+{
+    "id": "laptop_factory",
+    "type": "application",
+    "value": {
+        "description": "Simulation of a factory that builds laptops",
+        "author": "Sander Mertens",
+        "version": "1.0.0",
+        "language": "c",
+        "use": ["supplychain", "supplychain/laptop"]
+    }
+}
