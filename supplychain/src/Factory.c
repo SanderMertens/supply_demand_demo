@@ -155,9 +155,14 @@ int16_t supplychain_Factory_validate(
     }
 
     supplychain_ProductQuantity own_demand = {
-        this->produces,
-        this->demand - s->units_stored
+        this->produces
     };
+
+    if (this->demand < s->units_stored) {
+        own_demand.quantity = 0;
+    } else {
+        own_demand.quantity = this->demand - s->units_stored;
+    }
 
     /* Recalculate demand for different products */
     if (calculate_demand(this, this->produces, own_demand.quantity)) {
