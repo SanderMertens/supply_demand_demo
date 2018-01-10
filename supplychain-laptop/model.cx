@@ -17,15 +17,22 @@ table LcdAssembler: Factory/Equipment:/
     leaf backlight: type = EquipmentComponent
 
 Product CPU {
-    description = "CPU with four cores"
+    description = "Central processing unit"
 }
 
 Product RAM {
     description = "2GB RAM module"
 }
 
+Product NAND {
+    description = "NAND flash chip"
+}
+
 Product SSD {
-    description = "1TB persistent storage"
+    description = "1TB persistent storage",
+    requires = {
+        {NAND, 8}
+    }
 }
 
 Product LcdScreen {

@@ -42,7 +42,7 @@ container Factory:/
     table Equipment:/
         // Static values
         produces: Product, const
+        power_consumption: float32, const
 
         // Runtime values
-        enabled: target{bool}
-        power_consumption: float32, readonly
+        powered: target{bool}

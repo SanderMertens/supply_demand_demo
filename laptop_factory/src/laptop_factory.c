@@ -27,8 +27,15 @@ error:
 /* Application entrypoint */
 int cortomain(int argc, char *argv[]) {
 
+    corto_log_verbositySet(CORTO_TRACE);
+
     if (load_configuration()) {
         goto error;
+    }
+
+    /* Keep alive */
+    while (true) {
+        corto_sleep(1, 0);
     }
 
     return 0;

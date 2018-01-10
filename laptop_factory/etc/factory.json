@@ -1,37 +1,79 @@
 [
     {
-        "id": "LaptopFactory",
+        "id": "data/LaptopFactory",
         "type": "supplychain/Factory",
         "value": {
             "produces": "supplychain/laptop/Laptop"
         }
     },
     {
-        "id": "LaptopFactory/Equipment/Stepper",
+        "id": "data/LaptopFactory/Equipment/CpuStepper",
         "type": "supplychain/laptop/Stepper",
         "value": {
-            "produces": "supplychain/laptop/Cpu"
+            "produces": "supplychain/laptop/CPU"
         }
     },
     {
-        "id": "LaptopFactory/Equipment/Stepper",
+        "id": "data/LaptopFactory/Equipment/RAMStepper",
         "type": "supplychain/laptop/Stepper",
         "value": {
             "produces": "supplychain/laptop/RAM"
         }
     },
     {
-        "id": "LaptopFactory/Equipment/SsdAssembler",
+        "id": "data/LaptopFactory/Equipment/FlashStepper",
+        "type": "supplychain/laptop/Stepper",
+        "value": {
+            "produces": "supplychain/laptop/NAND"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/Equipment/SsdAssembler",
         "type": "supplychain/laptop/SsdAssembler",
         "value": {
             "produces": "supplychain/laptop/SSD"
         }
     },
     {
-        "id": "LaptopFactory/Equipment/LcdAssembler",
+        "id": "data/LaptopFactory/Equipment/LcdAssembler",
         "type": "supplychain/laptop/LcdAssembler",
         "value": {
             "produces": "supplychain/laptop/LcdScreen"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/CpuStorage",
+        "type": "supplychain/Storage",
+        "value": {
+            "stores": "supplychain/laptop/CPU"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/RamStorage",
+        "type": "supplychain/Storage",
+        "value": {
+            "stores": "supplychain/laptop/RAM"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/LcdStorage",
+        "type": "supplychain/Storage",
+        "value": {
+            "stores": "supplychain/laptop/LcdScreen"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/NandStorage",
+        "type": "supplychain/Storage",
+        "value": {
+            "stores": "supplychain/laptop/NAND"
+        }
+    },
+    {
+        "id": "data/LaptopFactory/SsdStorage",
+        "type": "supplychain/Storage",
+        "value": {
+            "stores": "supplychain/laptop/SSD"
         }
     }
 ]
