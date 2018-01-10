@@ -31,12 +31,12 @@ class EquipmentComponent:/
     int16 validate()
 
     // Static values
-    power_consumption: float32, const|readonly
+    power_consumption: float32, const|readonly, unit = units/watt
 
     // Runtime values
     operational_state: supplychain/OperationalState
     progress: uint8, readonly
-    temperature: float32, readonly
+    temperature: float32, readonly, unit=units/kelvin
 
 container Factory:/
     int16 validate()
@@ -48,7 +48,7 @@ container Factory:/
     produces: Product, const
 
     // Runtime values
-    power_consumption: float32, readonly
+    power_consumption: float32, readonly, unit=units/watt
     internal_demand: list{ProductQuantity}, readonly
 
     table Equipment:/
@@ -59,6 +59,6 @@ container Factory:/
         process_steps: list{EquipmentComponent}, const|readonly
 
         // Runtime values
-        power_consumption: float32, readonly
+        power_consumption: float32, readonly, unit=units/watt
         operational_state: supplychain/OperationalState, readonly
         current_step: uint32, readonly

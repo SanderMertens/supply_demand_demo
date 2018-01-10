@@ -6,6 +6,6 @@
         "author": "Sander Mertens",
         "version": "1.0.0",
         "language": "c",
-        "use": ["tags"]
+        "use": ["tags", "units"]
     }
 }
