@@ -28,6 +28,7 @@ class Storage:/
 
 // Equipment component (to be instantiated by subclass of Equipment)
 class EquipmentComponent:/
+    int16 init()
     int16 validate()
 
     // Static values
@@ -35,7 +36,6 @@ class EquipmentComponent:/
 
     // Runtime values
     operational_state: supplychain/OperationalState
-    progress: uint8, readonly
     temperature: float32, readonly, unit=units/kelvin
 
 container Factory:/
@@ -61,4 +61,4 @@ container Factory:/
         // Runtime values
         power_consumption: float32, readonly, unit=units/watt
         operational_state: supplychain/OperationalState, readonly
-        current_step: uint32, readonly
+        current_step: uint32, private

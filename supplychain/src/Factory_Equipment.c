@@ -19,7 +19,6 @@ int16_t supplychain_Factory_Equipment_validate(
             this,
             corto_ll_get(this->process_steps, this->current_step - 1));
         ec->operational_state = Supplychain_Off;
-        corto_update(ec);
     }
 
     if (this->operational_state == Supplychain_On) {
@@ -36,7 +35,6 @@ int16_t supplychain_Factory_Equipment_validate(
                     this,
                     corto_ll_get(this->process_steps, this->current_step - 1));
                 ec->operational_state = Supplychain_On;
-                corto_update(ec);
 
                 /* Power consumption of equipment equal consumption of current
                  * component. */
@@ -45,10 +43,27 @@ int16_t supplychain_Factory_Equipment_validate(
         }
     }
 
+    /* Update all components */
+    corto_id eqpt_id;
+    corto_iter it;
+    corto_fullpath(eqpt_id, this);
+    if (corto_select("*").from(eqpt_id).iter_objects(&it)) {
+        corto_throw(NULL);
+        goto error;
+    }
+
+    while(corto_iter_hasNext(&it)) {
+        corto_object component = corto_iter_next(&it);
+        corto_update(component);
+    }
+
+    /* Reset power level and step if not on */
     if (this->operational_state != Supplychain_On) {
         this->power_consumption = 0;
         this->current_step = 0;
     }
 
     return 0;
+error:
+    return -1;
 }
