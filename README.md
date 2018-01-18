@@ -7,6 +7,8 @@ The project also demonstrates how business logic can be implemented in classes s
 
 The project also demonstrates how a web user interface can be added simply by defining two configuration objects in a JSON file, and where to store this JSON file so that the project will always be able to locate it on the filesystem.
 
+A public demo of this project is running here: http://45.55.188.133:9090/?select=*&from=data
+
 ## Building and running the project
 First ensure that corto is installed, by running:
 ```
