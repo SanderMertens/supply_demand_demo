@@ -1,7 +1,7 @@
 in package supplychain
 
 enum OperationalState:/
-    Off, On, Idle
+    Off, On, Idle, Error
 
 // Forward declarations
 class Product
@@ -36,13 +36,13 @@ class EquipmentComponent:/
 
     // Runtime values
     operational_state: supplychain/OperationalState
-    temperature: float32, readonly, unit=units/kelvin
+    temperature: range{float32, {200,150},{450,500}}, readonly, unit=units/kelvin
 
 container Factory:/
     int16 validate()
 
     // Editable values
-    demand: uint32
+    demand: uint32, default = "100000"
 
     // Static values
     produces: Product, const

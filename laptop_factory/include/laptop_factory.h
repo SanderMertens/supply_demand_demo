@@ -8,6 +8,7 @@
 #define LAPTOP_FACTORY_H
 
 #include <corto/corto.h>
+#include <corto/corto.h>
 #include <include/_project.h>
 #include <supplychain/laptop/c/c.h>
 #include <supplychain/c/c.h>

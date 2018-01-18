@@ -14,31 +14,33 @@ int16_t supplychain_Factory_Equipment_validate(
     supplychain_Factory_Equipment this)
 {
     /* If current_step is set, turn off component from previous step */
-    if (this->current_step) {
-        supplychain_EquipmentComponent ec = find_component_leaf(
-            this,
-            corto_ll_get(this->process_steps, this->current_step - 1));
-        ec->operational_state = Supplychain_Off;
-    }
+    if (this->operational_state != Supplychain_Error) {
+        if (this->current_step) {
+            supplychain_EquipmentComponent ec = find_component_leaf(
+                this,
+                corto_ll_get(this->process_steps, this->current_step - 1));
+            ec->operational_state = Supplychain_Off;
+        }
 
-    if (this->operational_state == Supplychain_On) {
-        if (this->current_step >= corto_ll_count(this->process_steps)) {
-            /* Finished processing */
-            this->operational_state = Supplychain_Idle;
-        } else {
-            /* Process next step */
-            this->current_step ++;
+        if (this->operational_state == Supplychain_On) {
+            if (this->current_step >= corto_ll_count(this->process_steps)) {
+                /* Finished processing */
+                this->operational_state = Supplychain_Idle;
+            } else {
+                /* Process next step */
+                this->current_step ++;
 
-            /* Turn on component for current step */
-            if (this->current_step) {
-                supplychain_EquipmentComponent ec = find_component_leaf(
-                    this,
-                    corto_ll_get(this->process_steps, this->current_step - 1));
-                ec->operational_state = Supplychain_On;
+                /* Turn on component for current step */
+                if (this->current_step) {
+                    supplychain_EquipmentComponent ec = find_component_leaf(
+                        this,
+                        corto_ll_get(this->process_steps, this->current_step - 1));
+                    ec->operational_state = Supplychain_On;
 
-                /* Power consumption of equipment equal consumption of current
-                 * component. */
-                this->power_consumption = ec->power_consumption;
+                    /* Power consumption of equipment equal consumption of current
+                     * component. */
+                    this->power_consumption = ec->power_consumption;
+                }
             }
         }
     }
@@ -52,9 +54,17 @@ int16_t supplychain_Factory_Equipment_validate(
         goto error;
     }
 
+    if (this->operational_state == Supplychain_Error) {
+        this->operational_state = Supplychain_Off;
+    }
+
     while(corto_iter_hasNext(&it)) {
-        corto_object component = corto_iter_next(&it);
-        corto_update(component);
+        supplychain_EquipmentComponent e = corto_iter_next(&it);
+        corto_update(e);
+
+        if (e->operational_state == Supplychain_Error) {
+            this->operational_state = Supplychain_Error;
+        }
     }
 
     /* Reset power level and step if not on */

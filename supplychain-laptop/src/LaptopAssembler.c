@@ -21,6 +21,7 @@ int16_t laptop_LaptopAssembler_construct(
     /* Append components to process step list. Transfer ownership of lookup to
      * the list (no need to do corto_release) */
     supplychain_Factory_Equipment eqpt = supplychain_Factory_Equipment(this);
+
     corto_ll_append(eqpt->process_steps, place_cpu);
     corto_ll_append(eqpt->process_steps, place_ram);
     corto_ll_append(eqpt->process_steps, place_ssd);

@@ -28,8 +28,6 @@ error:
 int cortomain(int argc, char *argv[]) {
     corto_iter it;
 
-    corto_log_verbositySet(CORTO_TRACE);
-
     if (load_configuration()) {
         goto error;
     }
@@ -43,6 +41,7 @@ int cortomain(int argc, char *argv[]) {
     while (corto_iter_hasNext(&it)) {
         corto_object f = corto_iter_next(&it);
         corto_ll_append(factories, f);
+        corto_claim(f);
     }
 
     if (!corto_ll_count(factories)) {
@@ -57,7 +56,7 @@ int cortomain(int argc, char *argv[]) {
             corto_object f = corto_iter_next(&it);
             corto_update(f);
         }
-        corto_sleep(1, 0);
+        corto_sleep(0, 500000000);
     }
 
     return 0;
